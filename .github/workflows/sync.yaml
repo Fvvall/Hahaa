@@ -1,0 +1,42 @@
+name: Sync
+
+on:
+  push: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install git-filter-repo
+        run: |
+          pip install git-filter-repo
+
+      - name: Remove personal info
+        run: |
+          git filter-repo --commit-callback '
+          commit.author_name = b"Anonymous"
+          commit.author_email = b"anonymous@example.com"
+          commit.committer_name = b"Anonymous"
+          commit.committer_email = b"anonymous@example.com"
+          '
+          git config --unset-all http.https://github.com/.extraheader
+
+      - name: Push
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{secrets.TOKEN}}
+          repository: Fvvall/Hahaa
+          force: true
+
+permissions: write-all

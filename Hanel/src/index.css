@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 0;
+  min-height: 100dvh;
+}
+
+.list::before {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.list::after {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
