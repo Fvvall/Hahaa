@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.card:hover .image {
+  @apply h-24;
+}
+
+.description {
+  @apply line-clamp-[7];
+}
+
+.card:hover .description {
+  @apply h-40 line-clamp-[9]!;
+}
